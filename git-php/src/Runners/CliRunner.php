@@ -22,7 +22,7 @@
 		 */
 		public function __construct($gitBinary = 'git')
 		{
-			$this->gitBinary = $gitBinary;
+			$this->gitBinary = \defined('GIT_BINARY') ? \constant('GIT_BINARY') : $gitBinary;
 			$this->commandProcessor = new CommandProcessor;
 		}
 
