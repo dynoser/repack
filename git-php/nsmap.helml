@@ -1,4 +1,4 @@
-CzProject/GitPhp: :https://raw.githubusercontent.com/dynoser/git-php/master/git-php.hashsig.zip|EkDohf20jN/9kXW/WL3ZXo245ggek9TiTWzzmBriMTU= @/czproject/git-php/* @/czproject/git-php/src/* src/Git.php
+CzProject/GitPhp: @/czproject/git-php/src/*
 CzProject\GitPhp\Exception: @/czproject/git-php/src/exceptions.php
 CzProject\GitPhp\GitException: @/czproject/git-php/src/exceptions.php
 CzProject\GitPhp\InvalidArgumentException: @/czproject/git-php/src/exceptions.php
