@@ -1,0 +1,9 @@
+{
+    "filePatterns": [
+        "*.php"
+    ],
+    "excludePatterns": [],
+    "maxFilesCnt": 100,
+    "getHidden": false,
+    "maxSizeBytes": 1048576
+}
