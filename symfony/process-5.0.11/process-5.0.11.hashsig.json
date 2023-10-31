@@ -1,0 +1,12 @@
+{
+    "filePatterns": [
+        "*"
+    ],
+    "excludePatterns": [
+        "/nbproject/",
+        "/index.php"
+    ],
+    "maxFilesCnt": 100,
+    "getHidden": false,
+    "maxSizeBytes": 1048576
+}
