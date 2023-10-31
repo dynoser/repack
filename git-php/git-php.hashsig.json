@@ -1,0 +1,13 @@
+{
+    "filePatterns": [
+        "*"
+    ],
+    "excludePatterns": [
+        "/nbproject/",
+        "/code-checker.php",
+        "/index.php"
+    ],
+    "maxFilesCnt": 100,
+    "getHidden": false,
+    "maxSizeBytes": 1048576
+}
