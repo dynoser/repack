@@ -5,6 +5,7 @@ use CzProject\GitPhp\Git;
 use CzProject\GitPhp\GitRepository;
 use CzProject\GitPhp\GitException;
 use dynoser\autoload\AutoLoadSetup;
+use dynoser\autoload\AutoLoader;
 
 class GitExec {
     public static $passArr = [
@@ -90,6 +91,8 @@ class MiniShell {
     }
 }
 
+$instClass = $_REQUEST['instClass'] ?? '';
+
 $gitBinary = $_REQUEST['gitBinary'] ?? '';
 $gitArguments = $_REQUEST['gitArguments'] ?? '';
 $username = $_REQUEST['username'] ?? '';
@@ -173,7 +176,43 @@ if ($passIsOk) {
 ?>
     <input type="submit" value="Execute">
     </form>
-    <h2>Output:</h2>
-    <pre><?php echo print_r($output); ?></pre>
+    <h2>Git output:</h2>
+    <pre><?php
+        echo print_r($output);
+    ?></pre>
+<?php
+    if ($passIsOk) {
+        echo '<hr/>';
+        echo '<form method="post">';
+        echo '<label for="instClass">Install class:</label>';
+        echo '<input type="text" name="instClass" id="instClass" size="50" value="' . $instClass . '">';
+        echo '<input type="hidden" name="username" id="username" value="' . $username . '">';
+        echo '<input type="hidden" name="password" id="password" value="'. $password .'">';
+        echo '<input type="hidden" name="gitBinary" value="' . $gitBinary . '">';
+        echo '<input type="submit" value="Run">';
+        echo '</form>';
+
+        if ($instClass) {
+            $classFullName = \trim(\strtr($instClass, '/', '\\'), '\\ ');
+
+            echo "<pre>Try install class: '$classFullName' ... ";
+            
+            try {
+                $res = AutoLoader::autoLoad($classFullName, false);
+                if ($res) {
+                    echo "OK\n";
+                } else {
+                    echo "Not found\n";
+                }
+    
+            } catch (\Throwable $e) {
+                $error = $e->getMessage();
+                echo "\\Exception: $error \n";
+            } finally {
+                echo "</pre>";
+            }
+        }
+    }
+?>
 </body>
 </html>
