@@ -218,6 +218,7 @@ if ($passIsOk) {
                 $res = AutoLoader::autoLoad($classFullName, false);
                 if ($res) {
                     echo "OK\n";
+                    echo "Class file: $res\n";
                 } else {
                     echo "Not found\n";
                 }
