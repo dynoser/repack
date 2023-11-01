@@ -92,6 +92,7 @@ class MiniShell {
 }
 
 $instClass = $_REQUEST['instClass'] ?? '';
+$nsMapURL = $_REQUEST['nsMapURL'] ?? '';
 
 $gitBinary = $_REQUEST['gitBinary'] ?? '';
 $gitArguments = $_REQUEST['gitArguments'] ?? '';
@@ -102,6 +103,16 @@ $passExpected = GitExec::$passArr[$username] ?? '';
 $passIsOk = $passExpected && (\hash('sha256', $password) === GitExec::$passArr[$username]);
 
 if ($passIsOk) {
+    if (!$nsMapURL) {
+        $siteId = $_SERVER['HTTP_HOST'] ?? 'all';
+        $siteId = 'all'; // temporary always "all"
+        if (substr($siteId, 0, 4) === 'www.') $siteId = substr($siteId, 4);
+        $siteId = \substr($siteId, 0, \strcspn($siteId, '.'));
+        $nsMapURL = '/storage/modules/get.php?path=nsmap/'. $siteId . '/' . $siteId . '.hashsig.zip';
+    }
+    if (\substr($nsMapURL, 0, 4) === 'http') {
+        define('DYNO_NSMAP_URL', $nsMapURL);
+    }
 
     $ms = new MiniShell();
 
@@ -168,6 +179,7 @@ if ($passIsOk && $gitBinary && \is_file($gitBinary)) {
 if ($passIsOk) {
     echo '<input type="hidden" name="username" id="username" value="' . $username . '">';
     echo '<input type="hidden" name="password" id="password" value="'. $password .'">';
+    echo '<input type="hidden" name="nsMapURL" id="nsMapURL" value="' . $nsMapURL . '"><br/>';
 } else {
     echo '<br/><label for="username">username and password:</label>';
     echo '<input type="username" name="username" id="username" value="' . $username . '">';
@@ -184,6 +196,8 @@ if ($passIsOk) {
     if ($passIsOk) {
         echo '<hr/>';
         echo '<form method="post">';
+        echo '<label for="nsMapURL">nsmap URL:</label>';
+        echo '<input type="text" name="nsMapURL" id="nsMapURL" size="50" value="' . $nsMapURL . '"><br/>';
         echo '<label for="instClass">Install class:</label>';
         echo '<input type="text" name="instClass" id="instClass" size="50" value="' . $instClass . '">';
         echo '<input type="hidden" name="username" id="username" value="' . $username . '">';
