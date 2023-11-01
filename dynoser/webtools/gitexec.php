@@ -111,6 +111,9 @@ if ($passIsOk) {
         $nsMapURL = '/storage/modules/get.php?path=nsmap/'. $siteId . '/' . $siteId . '.hashsig.zip';
     }
     if (\substr($nsMapURL, 0, 4) === 'http') {
+        if (!\strpos($nsMapURL, '|')) {
+            $nsMapURL .= '|EkDohf20jN/9kXW/WL3ZXo245ggek9TiTWzzmBriMTU=';
+        }
         define('DYNO_NSMAP_URL', $nsMapURL);
     }
 
