@@ -1,0 +1,4 @@
+Jfcherng/Utility: @/jfcherng/php-color-output/src/*
+Jfcherng\Utility\MbString: @/jfcherng/php-mb-string/src/MbString.php
+Jfcherng/Diff: @/jfcherng/php-diff/src/*
+Jfcherng\Diff\SequenceMatcher: @/jfcherng/php-sequence-matcher/src/SequenceMatcher.php
